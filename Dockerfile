@@ -10,10 +10,11 @@ RUN apt-get update && apt-get install -yq dh-autoreconf make gcc \
  && ./autogen.sh \
  && ./configure  \
  && make install \
+ && cd .. \
 
  && apt-get autoremove -y dh-autoreconf make gcc \
  && apt-get clean purge \
- && rm -fR /tmp/* /protobuf-*
+ && rm -fR /var/cache/apt/archives/*.deb /tmp/* /protobuf-*
 
 ENTRYPOINT ["protoc"]
 CMD ["--help"]
