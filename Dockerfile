@@ -1,14 +1,17 @@
 FROM ubuntu:xenial
+
+RUN apt-get -qq update \
+ && apt-get -qq upgrade -y \
+ && apt-get -qq install -y locales
+
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV PROTOBUF_VERSION 3.0.0-beta-3
+ENV PROTOBUF_VERSION 3.5.0
 
-RUN apt-get -qq update \
- && apt-get -qq upgrade -y \
- && apt-get -qq install -y dh-autoreconf make gcc unzip \
+RUN apt-get -qq install -y dh-autoreconf make gcc unzip \
 
  && curl -L https://github.com/google/protobuf/archive/v$PROTOBUF_VERSION.tar.gz | gunzip -c | tar x \
  && cd protobuf-$PROTOBUF_VERSION \
